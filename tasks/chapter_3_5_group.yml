@@ -1,0 +1,25 @@
+---
+# ldap_data_kania_ollenburg/tasks/chapter_3_5_group.yml
+
+- name: 'Create posix_group benutzer'
+  ldap_entry:
+    dn: "cn=benutzer,ou=groups,{{ base_dn }}"
+    objectClass:
+      - 'posixGroup'
+    attributes:
+      gidNumber: '10000'
+  register: create_chapter_3_5_group
+
+- name: 'Create fact to ignore errors when in check_mode and the group would be created'
+  set_fact:
+    ignore_errors_chapter_3_5_group: 'true'
+  when: 'create_chapter_3_5_group.changed | bool and ansible_check_mode | bool'
+  check_mode: 'false'
+
+- name: 'Make sure all attributes are correct for the posix group benutzer'
+  ldap_attr:
+    dn: "cn=benutzer,ou=groups,{{ base_dn }}"
+    name: 'gidNumber'
+    values: '10000'
+    state: 'exact'
+  ignore_errors: "{{ ignore_errors_chapter_3_5_group }}"
