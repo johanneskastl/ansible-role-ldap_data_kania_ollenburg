@@ -22,6 +22,9 @@ This role has several parts, than can be enabled by setting some variables:
 - `add_debugging_script_and_ldif_files`: (default: false) Whether debugging script and LDIF files should be created
 - `remove_everything`: If you set this, the role will remove *EVERYTHING* it created, this includes files as well as directory entries. Only exception is the baseDN, as that cannot be deleted (easily).
 
+Please note:
+Due to a UID mismatch the inital testing users from chapter 3.5 will only be deployed if `add_initial_testing_users` is set to true. This will prevent the creation of the users from chapter 7.1 used for ACL testing.
+
 Dependencies
 ------------
 
