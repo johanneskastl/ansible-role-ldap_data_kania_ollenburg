@@ -1,0 +1,54 @@
+---
+# ldap_data_kania_ollenburg/tasks/chapter_7_1_groups.yml
+
+#
+# Verwaltung
+#
+- name: 'Create posix_group Verwaltung'
+  ldap_entry:
+    dn: "cn=Verwaltung,ou=groups,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    objectClass:
+      - 'posixGroup'
+    attributes:
+      gidNumber: '10001'
+  register: create_chapter_7_1_group_verwaltung
+
+- name: 'Create fact to ignore errors when in check_mode and the group would be created'
+  set_fact:
+    ignore_errors_chapter_7_1_group_verwaltung: 'true'
+  when: 'create_chapter_7_1_group_verwaltung.changed | bool and ansible_check_mode | bool'
+  check_mode: 'false'
+
+- name: 'Make sure all attributes are correct for the posix_group Verwaltung'
+  ldap_attr:
+    dn: "cn=Verwaltung,ou=groups,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    name: 'gidNumber'
+    values: '10001'
+    state: 'exact'
+  ignore_errors: "{{ ignore_errors_chapter_7_1_group_verwaltung }}"
+
+#
+# Produktion
+#
+- name: 'Create posix_group Produktion'
+  ldap_entry:
+    dn: "cn=Produktion,ou=groups,ou=Produktion,ou=Firma,{{ base_dn }}"
+    objectClass:
+      - 'posixGroup'
+    attributes:
+      gidNumber: '10002'
+  register: create_chapter_7_1_group_produktion
+
+- name: 'Create fact to ignore errors when in check_mode and the group would be created'
+  set_fact:
+    ignore_errors_chapter_7_1_group_produktion: 'true'
+  when: 'create_chapter_7_1_group_produktion.changed | bool and ansible_check_mode | bool'
+  check_mode: 'false'
+
+- name: 'Make sure all attributes are correct for the posix_group Produktion'
+  ldap_attr:
+    dn: "cn=Produktion,ou=groups,ou=Produktion,ou=Firma,{{ base_dn }}"
+    name: 'gidNumber'
+    values: '10002'
+    state: 'exact'
+  ignore_errors: "{{ ignore_errors_chapter_7_1_group_produktion }}"
