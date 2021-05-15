@@ -22,6 +22,15 @@
   loop:
     - "ou=users,{{ base_dn }}"
     - "ou=groups,{{ base_dn }}"
+    - "cn=Verwaltung,ou=groups,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    - "ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    - "ou=groups,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    - "ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    - "cn=Produktion,ou=groups,ou=Produktion,ou=Firma,{{ base_dn }}"
+    - "ou=users,ou=Produktion,ou=Firma,{{ base_dn }}"
+    - "ou=groups,ou=Produktion,ou=Firma,{{ base_dn }}"
+    - "ou=Produktion,ou=Firma,{{ base_dn }}"
+    - "ou=Firma,{{ base_dn }}"
 
 # The base DN cannot be deleted...
 
