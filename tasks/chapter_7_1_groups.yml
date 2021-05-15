@@ -22,7 +22,7 @@
   when: 'create_chapter_7_1_group_verwaltung.changed | bool and ansible_check_mode | bool'
   check_mode: 'false'
 
-- name: 'Make sure all attributes are correct for the posix_group Verwaltung'
+- name: 'Make sure the gidNumber is correct for the posix_group Verwaltung'
   ldap_attr:
     dn: "cn=Verwaltung,ou=groups,ou=Verwaltung,ou=Firma,{{ base_dn }}"
     name: 'gidNumber'
@@ -51,7 +51,7 @@
   when: 'create_chapter_7_1_group_produktion.changed | bool and ansible_check_mode | bool'
   check_mode: 'false'
 
-- name: 'Make sure all attributes are correct for the posix_group Produktion'
+- name: 'Make sure the gidNumber is correct for the posix_group Produktion'
   ldap_attr:
     dn: "cn=Produktion,ou=groups,ou=Produktion,ou=Firma,{{ base_dn }}"
     name: 'gidNumber'
