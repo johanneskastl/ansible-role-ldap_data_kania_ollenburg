@@ -66,4 +66,13 @@
     name: 'gidNumber'
     values: '10002'
     state: 'exact'
+  ignore_errors: "{{ ignore_errors_chapter_7_1_group_produktion}}"
+
+- name: 'Make sure the memberUIDs are correct for the posix_group Produktion'
+  ldap_attr:
+    dn: "cn=Produktion,ou=groups,ou=Produktion,ou=Firma,{{ base_dn }}"
+    name: 'memberUID'
+    values:
+      - 'al-prod'
+      - 'u1-prod'
   ignore_errors: "{{ ignore_errors_chapter_7_1_group_produktion }}"
