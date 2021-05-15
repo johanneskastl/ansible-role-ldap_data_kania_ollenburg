@@ -1,8 +1,10 @@
 ldap_data_kania_ollenburg
 =========
 
-OpenLDAP DIT based on the book by Stefan Kania and Andreas Ollenburg
+OpenLDAP DIT based on the book by Stefan Kania and Andreas Ollenburg:
 [OpenLDAP in der Praxis](https://www.hanser-kundencenter.de/fachbuch/artikel/9783446463875)
+
+The baseDN matches the one from the book, but can easily be overridden to make this work in other demo setups (see below).
 
 Requirements
 ------------
@@ -10,7 +12,6 @@ Requirements
 This role should be run against/on a LDAP server. Tested against OpenLDAP 2.4 on Debian 8/9/10, CentOS 7/8, openSUSE Leap 15.x and SLES15 currently.
 
 The role will install any dependencies that Ansible's `ldap_attr` or `ldap_entry` modules need.
-
 
 Role Variables
 --------------
