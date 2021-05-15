@@ -1,0 +1,157 @@
+---
+# ldap_data_kania_ollenburg/tasks/chapter_7_1_users.yml
+
+- name: 'Create regular users in chapter 7.1'
+  ldap_entry:
+    dn: "{{ item.dn }},{{ base_dn }}"
+    objectClass:
+      - 'posixAccount'
+      - 'inetOrgPerson'
+      - 'organizationalPerson'
+      - 'person'
+    attributes:
+      loginshell: '/bin/bash'
+      homeDirectory: "/home/{{ item.uid }}"
+      userPassword: "{{ chapter_7_1_password_hash }}"
+      uid: "{{ item.uid }}"
+      uidNumber: "{{ item.uidnumber }}"
+      gidNumber: "{{ item.gidnumber }}"
+      sn: "{{ item.sn }}"
+      givenName: "{{ item.givenname }}"
+      businessCategory: "{{ item.businesscategory }}"
+  with_items:
+    - dn: 'cn=u1 Prod,ou=users,ou=Produktion,ou=Firma'
+      uid: 'u1-prod'
+      uidnumber: '10000'
+      gidnumber: '10000'
+      sn: 'Prod'
+      givenname:
+        - 'u1'
+      businesscategory: 'Produktion'
+    - dn: 'cn=u1 Verw,ou=users,ou=Verwaltung,ou=Firma'
+      uid: 'u1-verw'
+      uidnumber: '10001'
+      gidnumber: '10000'
+      sn: 'Verw'
+      givenname:
+        - 'u1'
+      businesscategory: 'Verwaltung'
+    - dn: 'cn=Al Verw,ou=users,ou=Verwaltung,ou=Firma'
+      uid: 'al-verw'
+      uidnumber: '10002'
+      gidnumber: '10000'
+      sn: 'Verw'
+      givenname:
+        - 'Al'
+      businesscategory: 'Verwaltung'
+    - dn: 'cn=Al Prod,ou=users,ou=Produktion,ou=Firma'
+      uid: 'al-prod'
+      uidnumber: '10003'
+      gidnumber: '10000'
+      sn: 'Prod'
+      givenname:
+        - 'Al'
+      businesscategory: 'Produktion'
+  register: create_chapter_7_1_users
+
+- name: 'Create fact to ignore errors when in check_mode and the user would be created'
+  set_fact:
+    ignore_errors_chapter_7_1_users: 'true'
+  when: 'create_chapter_7_1_users.changed | bool and ansible_check_mode | bool'
+  check_mode: 'false'
+
+#
+# cn=u1 Prod
+#
+- name: 'Make sure all attributes are correct for cn=u1 Prod'
+  ldap_attr:
+    dn: "cn=u1 Prod,ou=users,ou=Produktion,ou=Firma,{{ base_dn }}"
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
+    state: 'exact'
+  loop: "{{ user_details | dict2items }}"
+  vars:
+    user_details:
+      loginShell: '/bin/bash'
+      homeDirectory: '/home/u1-prod'
+      userPassword: "{{ chapter_7_1_password_hash }}"
+      uid: 'u1-prod'
+      uidNumber: '10000'
+      gidNumber: '10000'
+      sn: 'Prod'
+      givenName:
+        - 'u1'
+      businessCategory: 'Produktion'
+  ignore_errors: "{{ ignore_errors_chapter_7_1_users }}"
+
+#
+# cn=u1 Verw
+#
+- name: 'Make sure all attributes are correct for cn=u1 Verw'
+  ldap_attr:
+    dn: "cn=u1 Verw,ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
+    state: 'exact'
+  loop: "{{ user_details | dict2items }}"
+  vars:
+    user_details:
+      loginShell: '/bin/bash'
+      homeDirectory: '/home/u1-verw'
+      userPassword: "{{ chapter_7_1_password_hash }}"
+      uid: 'u1-verw'
+      uidNumber: '10001'
+      gidNumber: '10000'
+      sn: 'Verw'
+      givenName:
+        - 'u1'
+      businessCategory: 'Verwaltung'
+  ignore_errors: "{{ ignore_errors_chapter_7_1_users }}"
+
+#
+# cn=Al Verw
+#
+- name: 'Make sure all attributes are correct for cn=Al Verw'
+  ldap_attr:
+    dn: "cn=Al Verw,ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
+    state: 'exact'
+  loop: "{{ user_details | dict2items }}"
+  vars:
+    user_details:
+      loginShell: '/bin/bash'
+      homeDirectory: '/home/al-verw'
+      userPassword: "{{ chapter_7_1_password_hash }}"
+      uid: 'al-verw'
+      uidNumber: '10002'
+      gidNumber: '10000'
+      sn: 'Verw'
+      givenName:
+        - 'Al'
+      businessCategory: 'Verwaltung'
+  ignore_errors: "{{ ignore_errors_chapter_7_1_users }}"
+
+#
+# cn=Al Prod
+#
+- name: 'Make sure all attributes are correct for cn=Al Prod'
+  ldap_attr:
+    dn: "cn=Al Prod,ou=users,ou=Produktion,ou=Firma,{{ base_dn }}"
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
+    state: 'exact'
+  loop: "{{ user_details | dict2items }}"
+  vars:
+    user_details:
+      loginShell: '/bin/bash'
+      homeDirectory: '/home/al-prod'
+      userPassword: "{{ chapter_7_1_password_hash }}"
+      uid: 'al-prod'
+      uidNumber: '10003'
+      gidNumber: '10000'
+      sn: 'Prod'
+      givenName:
+        - 'Al'
+      businessCategory: 'Produktion'
+  ignore_errors: "{{ ignore_errors_chapter_7_1_users }}"
