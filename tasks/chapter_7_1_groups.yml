@@ -30,6 +30,15 @@
     state: 'exact'
   ignore_errors: "{{ ignore_errors_chapter_7_1_group_verwaltung }}"
 
+- name: 'Make sure the memberUIDs are correct for the posix_group Verwaltung'
+  ldap_attr:
+    dn: "cn=Verwaltung,ou=groups,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    name: 'memberUID'
+    values:
+      - 'al-verw'
+      - 'u1-verw'
+  ignore_errors: "{{ ignore_errors_chapter_7_1_group_verwaltung }}"
+
 #
 # Produktion
 #
