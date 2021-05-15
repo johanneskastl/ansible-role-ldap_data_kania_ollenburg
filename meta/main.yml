@@ -1,0 +1,32 @@
+galaxy_info:
+  role_name: 'ldap_data_kania_ollenburg'
+  author: 'Johannes Kastl'
+  description: 'OpenLDAP DIT based on the book by Stefan Kania and Andreas Ollenburg'
+  company: 'B1 Systems GmbH'
+
+  license: 'BSD-3-Clause'
+
+  min_ansible_version: 2.3
+
+  platforms:
+  - name: EL
+    versions:
+    - 7
+    - 8
+  - name: Debian
+    versions:
+    - 8
+    - 9
+    - 10
+  - name: opensuse
+    versions:
+    - 15.1
+    - 15.2
+    - 15.3
+  - name: SLES
+    versions:
+    - 15
+
+  galaxy_tags: []
+
+dependencies: []
