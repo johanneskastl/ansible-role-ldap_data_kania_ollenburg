@@ -19,6 +19,10 @@
   include_tasks: basedn_and_OUs.yml
   when: 'not remove_everything | bool'
 
+- name: 'Run chapter_3_5_group.yml'
+  include_tasks: chapter_3_5_group.yml
+  when: 'not remove_everything | bool'
+
 - name: 'Run chapter_3_5.yml'
   include_tasks: chapter_3_5.yml
   when: 'not remove_everything | bool'
