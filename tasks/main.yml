@@ -17,24 +17,30 @@
 
 - name: 'Run basedn_and_OUs.yml'
   include_tasks: basedn_and_OUs.yml
-  when: 'not remove_everything | bool'
+  when:
+    - 'not remove_everything | bool'
 
 - name: 'Run chapter_3_5_group.yml'
   include_tasks: chapter_3_5_group.yml
-  when: 'not remove_everything | bool'
+  when:
+    - 'not remove_everything | bool'
 
 - name: 'Run chapter_3_5.yml'
   include_tasks: chapter_3_5.yml
-  when: 'not remove_everything | bool'
+  when:
+    - 'not remove_everything | bool'
 
 - name: 'Run sssd_user.yml'
   include_tasks: sssd_user.yml
-  when: 'not remove_everything | bool'
+  when:
+    - 'not remove_everything | bool'
 
 - name: 'Run chapter_7_1_groups.yml'
   include_tasks: chapter_7_1_groups.yml
-  when: 'not remove_everything | bool'
+  when:
+    - 'not remove_everything | bool'
 
 - name: 'Run delete_everything.yml'
   include_tasks: delete_everything.yml
-  when: 'remove_everything | bool'
+  when:
+    - 'remove_everything | bool'
