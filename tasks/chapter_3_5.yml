@@ -1,0 +1,82 @@
+---
+# ldap_data_kania_ollenburg/tasks/chapter_3.5.yml
+
+- name: 'Create regular users in chapter 3.5'
+  ldap_entry:
+    dn: "{{ item.dn }},ou=users,{{ base_dn }}"
+    objectClass:
+      - 'posixAccount'
+      - 'inetOrgPerson'
+      - 'organizationalPerson'
+      - 'person'
+    attributes:
+      loginshell: '/bin/bash'
+      homeDirectory: "/home/{{ item.uid }}"
+      userPassword: "{{ chapter_3_5_password_hash }}"
+      uid: "{{ item.uid }}"
+      uidNumber: "{{ item.uidnumber }}"
+      gidNumber: "{{ item.gidnumber }}"
+      sn: "{{ item.sn }}"
+      givenName: "{{ item.givenname }}"
+  with_items:
+    - dn: 'cn=Stefan Kania'
+      uid: 'skania'
+      uidnumber: '10000'
+      gidnumber: '10000'
+      sn: 'Kania'
+      givenname:
+        - 'Stefan'
+    - dn: 'cn=Andreas Ollenburg'
+      uid: 'aollenburg'
+      uidnumber: '10001'
+      gidnumber: '10001'
+      sn: 'Ollenburg'
+      givenname:
+        - 'Andreas'
+  register: create_chapter_3_5
+
+- name: 'Create fact to ignore errors when in check_mode and the user would be created'
+  set_fact:
+    ignore_errors_chapter_3_5: 'true'
+  when: 'create_chapter_3_5.changed | bool and ansible_check_mode | bool'
+  check_mode: 'false'
+
+- name: 'Make sure all attributes are correct for Stefan Kania'
+  ldap_attr:
+    dn: "cn=Stefan Kania,ou=users,{{ base_dn }}"
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
+    state: 'exact'
+  loop: "{{ user_details | dict2items }}"
+  vars:
+    user_details:
+      loginShell: '/bin/bash'
+      homeDirectory: '/home/skania'
+      userPassword: "{{ chapter_3_5_password_hash }}"
+      uid: 'skania'
+      uidNumber: '10000'
+      gidNumber: '10000'
+      sn: 'Kania'
+      givenName:
+        - 'Stefan'
+  ignore_errors: "{{ ignore_errors_chapter_3_5 }}"
+
+- name: 'Make sure all attributes are correct for Andreas Ollenburg'
+  ldap_attr:
+    dn: "cn=Andreas Ollenburg,ou=users,{{ base_dn }}"
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
+    state: 'exact'
+  loop: "{{ user_details | dict2items }}"
+  vars:
+    user_details:
+      loginShell: '/bin/bash'
+      homeDirectory: '/home/aollenburg'
+      userPassword: "{{ chapter_3_5_password_hash }}"
+      uid: 'aollenburg'
+      uidNumber: '10001'
+      gidNumber: '10001'
+      sn: 'Ollenburg'
+      givenName:
+        - 'Andreas'
+  ignore_errors: "{{ ignore_errors_chapter_3_5 }}"
