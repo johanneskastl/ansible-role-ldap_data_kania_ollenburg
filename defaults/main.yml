@@ -14,4 +14,6 @@ rootdn_name: 'cn=admin'
 # as Ansible's ldap_attrs cannot handle this
 ignore_errors_chapter_3_5: 'false'
 ignore_errors_chapter_3_5_group: 'false'
+ignore_errors_chapter_7_1_group_verwaltung: 'false'
+ignore_errors_chapter_7_1_group_produktion: 'false'
 ignore_errors_sssd_user: 'false'
