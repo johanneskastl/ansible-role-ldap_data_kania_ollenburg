@@ -26,8 +26,8 @@
     - 'not remove_everything | bool'
     - 'add_initial_testing_users | bool'
 
-- name: 'Run chapter_3_5.yml'
-  include_tasks: chapter_3_5.yml
+- name: 'Run chapter_3_5_users.yml'
+  include_tasks: chapter_3_5_users.yml
   when:
     - 'not remove_everything | bool'
     - 'add_initial_testing_users | bool'

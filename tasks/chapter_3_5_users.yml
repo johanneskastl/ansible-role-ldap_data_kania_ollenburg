@@ -1,5 +1,5 @@
 ---
-# ldap_data_kania_ollenburg/tasks/chapter_3.5.yml
+# ldap_data_kania_ollenburg/tasks/chapter_3.5_users.yml
 
 - name: 'Create regular users in chapter 3.5'
   ldap_entry:
