@@ -22,3 +22,7 @@
 - name: 'Run chapter_3_5.yml'
   include_tasks: chapter_3_5.yml
   when: 'not remove_everything | bool'
+
+- name: 'Run sssd_user.yml'
+  include_tasks: sssd_user.yml
+  when: 'not remove_everything | bool'
