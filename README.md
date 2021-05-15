@@ -29,6 +29,11 @@ Due to a UID mismatch the inital testing users from chapter 3.5 will only be dep
 
 - `base_dn`: the desired baseDN, default value is `dc=example,dc=net`
 
+*Password Hashes*
+- `sssd_user_password_hash`: (required) hashed password for the sssd-user user
+- `chapter_7_1_password_hash`: (required) hashed password for the users in chapter 7.1
+- `chapter_3_5_password_hash`: (optional) hashed password for the users in chapther 3.5 (that only get created if `add_initial_testing_users` is set to true by the user)
+
 Dependencies
 ------------
 
