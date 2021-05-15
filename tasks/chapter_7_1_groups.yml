@@ -11,6 +11,9 @@
       - 'posixGroup'
     attributes:
       gidNumber: '10001'
+      memberUID:
+        - 'al-verw'
+        - 'u1-verw'
   register: create_chapter_7_1_group_verwaltung
 
 - name: 'Create fact to ignore errors when in check_mode and the group would be created'
@@ -37,6 +40,9 @@
       - 'posixGroup'
     attributes:
       gidNumber: '10002'
+      memberUID:
+        - 'al-prod'
+        - 'u1-prod'
   register: create_chapter_7_1_group_produktion
 
 - name: 'Create fact to ignore errors when in check_mode and the group would be created'
