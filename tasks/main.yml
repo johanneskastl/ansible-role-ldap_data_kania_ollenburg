@@ -37,6 +37,12 @@
   when:
     - 'not remove_everything | bool'
 
+- name: 'Run chapter_7_1_ous.yml'
+  include_tasks: chapter_7_1_ous.yml
+  when:
+    - 'not remove_everything | bool'
+    - 'not add_initial_testing_users | bool'
+
 - name: 'Run chapter_7_1_groups.yml'
   include_tasks: chapter_7_1_groups.yml
   when:
