@@ -34,6 +34,15 @@ Due to a UID mismatch the inital testing users from chapter 3.5 will only be dep
 - `chapter_7_1_password_hash`: (required) hashed password for the users in chapter 7.1
 - `chapter_3_5_password_hash`: (optional) hashed password for the users in chapther 3.5 (that only get created if `add_initial_testing_users` is set to true by the user)
 
+*Cleartext passwords*
+In case you set the `add_debugging_script_and_ldif_files` variable, this role will create a debugging script and lots of LDIF files to help with debugging. You can then delete and manually create users, groups or set/delete the ACLs.
+
+The debugging script needs the *cleartext* passwords of the users. This should obviously *not be used on productive servers with real passwords*!
+
+- `rootdn_password`: cleartext password of the rootDN
+- `sssd_user_password`: cleartext password of the sssd-user
+- `chapter_7_1_password`: cleartext password of the regular users from chapter 7.1
+
 Dependencies
 ------------
 
