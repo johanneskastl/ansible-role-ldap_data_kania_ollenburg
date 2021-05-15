@@ -24,11 +24,13 @@
   include_tasks: chapter_3_5_group.yml
   when:
     - 'not remove_everything | bool'
+    - 'add_initial_testing_users | bool'
 
 - name: 'Run chapter_3_5.yml'
   include_tasks: chapter_3_5.yml
   when:
     - 'not remove_everything | bool'
+    - 'add_initial_testing_users | bool'
 
 - name: 'Run sssd_user.yml'
   include_tasks: sssd_user.yml
@@ -39,6 +41,7 @@
   include_tasks: chapter_7_1_groups.yml
   when:
     - 'not remove_everything | bool'
+    - 'not add_initial_testing_users | bool'
 
 - name: 'Run delete_everything.yml'
   include_tasks: delete_everything.yml
