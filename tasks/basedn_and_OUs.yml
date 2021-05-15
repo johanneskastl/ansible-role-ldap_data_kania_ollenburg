@@ -1,0 +1,23 @@
+---
+# ldap_data_kania_ollenburg/tasks/basedn_and_ous.yml
+
+- name: 'Create the baseDN'
+  ldap_entry:
+    dn: "{{ base_dn }}"
+    objectClass:
+      - 'domain'
+      - 'dcObject'
+
+- name: 'Create the users OU'
+  ldap_entry:
+    dn: "ou=users,{{ base_dn }}"
+    objectClass:
+      - 'top'
+      - 'organizationalUnit'
+
+- name: 'Create the groups OU'
+  ldap_entry:
+    dn: "ou=groups,{{ base_dn }}"
+    objectClass:
+      - 'top'
+      - 'organizationalUnit'
