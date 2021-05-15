@@ -5,6 +5,7 @@
 apply_ACLs: 'true'
 remove_everything: 'false'
 add_debugging_script_and_ldif_files: 'false'
+add_initial_testing_users: 'false'
 
 # default values for the tree
 base_dn: 'dc=example,dc=net'
