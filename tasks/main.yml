@@ -30,3 +30,7 @@
 - name: 'Run sssd_user.yml'
   include_tasks: sssd_user.yml
   when: 'not remove_everything | bool'
+
+- name: 'Run delete_everything.yml'
+  include_tasks: delete_everything.yml
+  when: 'remove_everything | bool'
