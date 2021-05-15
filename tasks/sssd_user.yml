@@ -1,0 +1,27 @@
+---
+# ldap_data_kania_ollenburg/tasks/sssd_user.yml
+
+- name: 'Create sssd-user user'
+  ldap_entry:
+    dn: "uid=sssd-user,ou=users,{{ base_dn }}"
+    objectClass:
+      - 'top'
+      - 'account'
+      - 'simpleSecurityObject'
+    attributes:
+      userPassword: "{{ sssd_user_password_hash }}"
+  register: create_sssd_user
+
+- name: 'Create fact to ignore errors when in check_mode and the user would be created'
+  set_fact:
+    ignore_errors_sssd_user: 'true'
+  when: 'create_sssd_user.changed | bool and ansible_check_mode | bool'
+  check_mode: 'false'
+
+- name: 'Make sure all attributes are correct for sssd-user'
+  ldap_attr:
+    dn: "uid=sssd-user,ou=users,{{ base_dn }}"
+    name: 'userPassword'
+    values: "{{ sssd_user_password_hash }}"
+    state: 'exact'
+  ignore_errors: "{{ ignore_errors_sssd_user }}"
