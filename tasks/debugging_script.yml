@@ -1,0 +1,37 @@
+---
+# ldap_data_kania_ollenburg/tasks/debugging_script.yml
+
+- name: 'Create debugging script'
+  template:
+    src: 'ldap_acl_debugging.sh.j2'
+    dest: '/root/ldap_acl_debugging.sh'
+    owner: 'root'
+    group: 'root'
+    mode: '0700'
+
+- name: 'Create the directory /root/LDAP_configuration_via_ansible/'
+  file:
+    path: '/root/LDAP_configuration_via_ansible/'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0700'
+
+- name: 'Create files to manually create and delete the users and groups'
+  template:
+    src: "{{ item }}.j2"
+    dest: "/root/LDAP_configuration_via_ansible/{{ item }}"
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+  loop:
+    - 'DELETE_acl_0.ldif'
+    - 'DELETE_acl_1.ldif'
+    - 'DELETE_acl_2.ldif'
+    - 'DELETE_acl_3.ldif'
+    - 'DELETE_acl_4.ldif'
+    - 'DELETE_acl_5.ldif'
+    - 'DELETE_acl_6.ldif'
+    - 'DELETE_acl_7.ldif'
+    - 'DELETE_acl_8.ldif'
+    - 'DELETE_acl_9.ldif'
