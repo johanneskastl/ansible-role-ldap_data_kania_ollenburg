@@ -1,0 +1,63 @@
+dn: cn=u1 Prod,ou=users,ou=Produktion,ou=Firma,{{ base_dn }}
+objectClass: posixAccount
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+loginshell: /bin/bash
+homeDirectory: /home/u1-prod
+uid: u1-prod
+cn: u1 Prod
+userPassword: {{ chapter_7_1_password_hash }}
+uidNumber: 10000
+gidNumber: 10000
+sn: Prod
+givenName: u1
+businesscategory: Produktion
+
+dn: cn=u1 Verw,ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}
+objectClass: posixAccount
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+loginshell: /bin/bash
+homeDirectory: /home/u1-verw
+uid: u1-verw
+cn: u1 Verw
+userPassword: {{ chapter_7_1_password_hash }}
+uidNumber: 10001
+gidNumber: 10000
+sn: Verw
+givenName: u1
+businesscategory: Verwaltung
+
+dn: cn=Al Verw,ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}
+objectClass: posixAccount
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+loginshell: /bin/bash
+homeDirectory: /home/al-verw
+uid: al-verw
+cn: Al Verw
+userPassword: {{ chapter_7_1_password_hash }}
+uidNumber: 10002
+gidNumber: 10000
+sn: Verw
+givenName: Al
+businesscategory: Verwaltung
+
+dn: cn=Al Prod,ou=users,ou=Produktion,ou=Firma,{{ base_dn }}
+objectClass: posixAccount
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+loginshell: /bin/bash
+homeDirectory: /home/al-prod
+uid: al-prod
+cn: Al Prod
+userPassword: {{ chapter_7_1_password_hash }}
+uidNumber: 10003
+gidNumber: 10000
+sn: Prod
+givenName: Al
+businesscategory: Produktion
