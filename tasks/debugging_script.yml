@@ -42,3 +42,4 @@
     - 'step5_OU_Firma.ldif'
     - 'step6_OUs_Produktion.ldif'
     - 'step7_OUs_Verwaltung.ldif'
+    - 'step8_posixgroups_Verwaltung_Produktion.ldif'
