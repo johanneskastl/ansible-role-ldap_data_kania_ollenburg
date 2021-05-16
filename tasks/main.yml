@@ -61,6 +61,12 @@
     - 'not remove_everything | bool'
     - 'not add_initial_testing_users | bool'
 
+- name: 'Run debugging_script.yml'
+  include_tasks: debugging_script.yml
+  when:
+    - 'not remove_everything | bool'
+    - 'add_debugging_script_and_ldif_files | bool'
+
 - name: 'Run delete_everything.yml'
   include_tasks: delete_everything.yml
   when:
