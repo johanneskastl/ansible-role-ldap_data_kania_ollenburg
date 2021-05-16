@@ -9,6 +9,7 @@
     - "cn=Stefan Kania,ou=users,{{ base_dn }}"
     - "cn=Andreas Ollenburg,ou=users,{{ base_dn }}"
     - "uid=sssd-user,ou=users,{{ base_dn }}"
+    - "uid=ldap-admin,ou=users,{{ base_dn }}"
     - "cn=u1 Prod,ou=users,ou=Produktion,ou=Firma,{{ base_dn }}"
     - "cn=u1 Verw,ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}"
     - "cn=Al Verw,ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}"
