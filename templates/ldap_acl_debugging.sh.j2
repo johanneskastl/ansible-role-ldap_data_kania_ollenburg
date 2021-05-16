@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# common options
+ldapsearch_args="-LLL -b {{ base_dn }} -H ldapi:///"
+ldapsearch_external="ldapsearch -Q -Y EXTERNAL"
+ldapsearch_simple_bind="ldapsearch -x"
+
+##############################################################
+echo "####################"
+echo "ldapsearch as rootDN"
+$ldapsearch_simple_bind $ldapsearch_args -D "{{ rootdn_name }},{{ base_dn }}" -w {{ rootdn_password }} "(cn=Al Verw)" dn
+
+##############################################################
+echo "####################"
+echo "ldapsearch as EXTERNAL"
+$ldapsearch_external $ldapsearch_args "(cn=Al Verw)" dn
+
+##############################################################
+echo "####################"
+echo "ldapsearch as ldap-admin"
+$ldapsearch_simple_bind $ldapsearch_args -D "uid=ldap-admin,ou=users,{{ base_dn }}" -w {{ ldapadmin_password }} "(cn=Al Verw)" dn
+
+##############################################################
+echo "####################"
+echo "ldapsearch for al-verw as sssd-user"
+$ldapsearch_simple_bind $ldapsearch_args -D "uid=sssd-user,ou=users,{{ base_dn }}" -w {{ sssd_user_password }} "(cn=Al Verw)" dn
+
+echo "ldapsearch for u1-verw as sssd-user"
+$ldapsearch_simple_bind $ldapsearch_args -D "uid=sssd-user,ou=users,{{ base_dn }}" -w {{ sssd_user_password }} "(cn=u1 Verw)" dn
+
+##############################################################
+echo "####################"
+echo "ldapsearch for own DN as unprivileged user"
+$ldapsearch_simple_bind $ldapsearch_args -D "cn=Al Verw,ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}" -w {{ chapter_7_1_password }} "(cn=Al Verw)" dn
+
+echo "ldapsearch for other DN as unprivileged user"
+$ldapsearch_simple_bind $ldapsearch_args -D "cn=Al Verw,ou=users,ou=Verwaltung,ou=Firma,{{ base_dn }}" -w {{ chapter_7_1_password }} "(cn=u1 Verw)" dn
+
+##############################################################
+echo "####################"
+echo "ldapsearch as anonymous (should fail with 'No such object (32)')"
+$ldapsearch_simple_bind $ldapsearch_args "(cn=Al Verw)" dn
