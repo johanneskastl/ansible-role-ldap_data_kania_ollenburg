@@ -1,0 +1,15 @@
+dn: uid=ldap-admin,ou=users,{{ base_dn }}
+objectClass: top
+objectClass: posixAccount
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: ldap-admin
+gidNumber: 10001
+givenName: LDAP
+homeDirectory: /home/ldap-admin
+loginshell: /bin/bash
+sn: Admin
+uid: ldap-admin
+uidNumber: 11111
+userPassword: {{ ldapadmin_password_hash }}
