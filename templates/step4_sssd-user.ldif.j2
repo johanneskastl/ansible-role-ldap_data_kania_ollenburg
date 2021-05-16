@@ -1,0 +1,6 @@
+dn: uid=sssd-user,ou=users,{{ base_dn }}
+objectClass: account
+objectClass: simpleSecurityObject
+objectClass: top
+uid: sssd-user
+userPassword: {{ sssd_user_password_hash }}
