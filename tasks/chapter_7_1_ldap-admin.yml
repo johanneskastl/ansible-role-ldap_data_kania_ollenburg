@@ -1,0 +1,49 @@
+---
+# ldap_data_kania_ollenburg/tasks/chapter_7_1_ldap-admin.yml
+
+- name: 'Create the ldap-admin user'
+  ldap_entry:
+    dn: "uid=ldap-admin,ou=users,{{ base_dn }}"
+    objectClass:
+      - 'top'
+      - 'posixAccount'
+      - 'inetOrgPerson'
+      - 'organizationalPerson'
+      - 'person'
+    attributes:
+      cn: 'ldap-admin'
+      gidNumber: '10001'
+      givenName: 'LDAP'
+      homeDirectory: '/home/ldap-admin'
+      loginshell: '/bin/bash'
+      sn: 'Admin'
+      uid: 'ldap-admin'
+      uidNumber: '11111'
+      userPassword: "{{ ldapadmin_password_hash }}"
+  register: create_ldapadmin
+
+- name: 'Create fact to ignore errors when in check_mode and the user would be created'
+  set_fact:
+    ignore_errors_ldapadmin: 'true'
+  when: 'create_ldapadmin.changed | bool and ansible_check_mode | bool'
+  check_mode: 'false'
+
+- name: 'Make sure all attributes are correct for ldap-admin'
+  ldap_attr:
+    dn: "uid=ldap-admin,ou=users,{{ base_dn }}"
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
+    state: 'exact'
+  loop: "{{ user_details | dict2items }}"
+  vars:
+    user_details:
+      loginShell: '/bin/bash'
+      homeDirectory: '/home/ldap-admin'
+      userPassword: "{{ ldapadmin_password_hash }}"
+      uid: 'ldap-admin'
+      uidNumber: '11111'
+      gidNumber: '10001'
+      sn: 'Admin'
+      givenName:
+        - 'LDAP'
+  ignore_errors: "{{ ignore_errors_ldapadmin }}"
