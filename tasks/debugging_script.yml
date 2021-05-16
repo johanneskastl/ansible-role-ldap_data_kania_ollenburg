@@ -40,3 +40,4 @@
     - 'step3_ldap-admin.ldif'
     - 'step4_sssd-user.ldif'
     - 'step5_OU_Firma.ldif'
+    - 'step6_OUs_Produktion.ldif'
