@@ -26,6 +26,7 @@
     mode: '0600'
   loop:
     - 'acl_0.ldif'
+    - 'acl_1.ldif'
     - 'DELETE_acl_0.ldif'
     - 'DELETE_acl_1.ldif'
     - 'DELETE_acl_2.ldif'
