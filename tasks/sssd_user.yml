@@ -10,6 +10,8 @@
       - 'simpleSecurityObject'
     attributes:
       userPassword: "{{ sssd_user_password_hash }}"
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   register: create_sssd_user
 
 - name: 'Create fact to ignore errors when in check_mode and the user would be created'
@@ -24,4 +26,6 @@
     name: 'userPassword'
     values: "{{ sssd_user_password_hash }}"
     state: 'exact'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   ignore_errors: "{{ ignore_errors_sssd_user }}"
