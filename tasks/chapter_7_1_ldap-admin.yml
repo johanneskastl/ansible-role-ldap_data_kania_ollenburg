@@ -20,6 +20,8 @@
       uid: 'ldap-admin'
       uidNumber: '11111'
       userPassword: "{{ ldapadmin_password_hash }}"
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   register: create_ldapadmin
 
 - name: 'Create fact to ignore errors when in check_mode and the user would be created'
@@ -34,6 +36,8 @@
     name: "{{ item.key }}"
     values: "{{ item.value }}"
     state: 'exact'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop: "{{ user_details | dict2items }}"
   vars:
     user_details:
