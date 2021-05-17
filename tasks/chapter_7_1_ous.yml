@@ -7,6 +7,8 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Create the Verwaltung OU'
   ldap_entry:
@@ -14,6 +16,8 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Create the groups OU for Verwaltung'
   ldap_entry:
@@ -21,6 +25,8 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Create the users OU for Verwaltung'
   ldap_entry:
@@ -28,6 +34,8 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Create the Produktion OU'
   ldap_entry:
@@ -35,6 +43,8 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Create the users OU for Produktion'
   ldap_entry:
@@ -42,6 +52,8 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Create the groups OU for Produktion'
   ldap_entry:
@@ -49,3 +61,5 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"

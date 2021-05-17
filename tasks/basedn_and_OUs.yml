@@ -7,6 +7,8 @@
     objectClass:
       - 'domain'
       - 'dcObject'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Create the users OU'
   ldap_entry:
@@ -14,6 +16,8 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Create the groups OU'
   ldap_entry:
@@ -21,3 +25,5 @@
     objectClass:
       - 'top'
       - 'organizationalUnit'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"

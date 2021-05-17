@@ -6,6 +6,8 @@
     dn: 'olcDatabase={2}mdb,cn=config'
     name: 'olcAccess'
     values: "{{ item }}"
+    bind_dn: "{{ rootdn_cn_config }}"
+    bind_pw: "{{ rootdn_cn_config_password | default(rootdn_password) }}"
   loop:
     - '{0}to dn.exact="" by * read'
     - '{1}to dn.exact=cn=subschema by * read'

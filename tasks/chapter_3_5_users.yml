@@ -18,6 +18,8 @@
       gidNumber: "{{ item.gidnumber }}"
       sn: "{{ item.sn }}"
       givenName: "{{ item.givenname }}"
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   with_items:
     - dn: 'cn=Stefan Kania'
       uid: 'skania'
@@ -47,6 +49,8 @@
     name: "{{ item.key }}"
     values: "{{ item.value }}"
     state: 'exact'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop: "{{ user_details | dict2items }}"
   vars:
     user_details:
@@ -67,6 +71,8 @@
     name: "{{ item.key }}"
     values: "{{ item.value }}"
     state: 'exact'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop: "{{ user_details | dict2items }}"
   vars:
     user_details:

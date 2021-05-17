@@ -5,6 +5,8 @@
   ldap_entry:
     dn: "{{ item }}"
     state: 'absent'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop:
     - "cn=Stefan Kania,ou=users,{{ base_dn }}"
     - "cn=Andreas Ollenburg,ou=users,{{ base_dn }}"
@@ -19,11 +21,29 @@
   ldap_entry:
     dn: "cn=benutzer,ou=groups,{{ base_dn }}"
     state: 'absent'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
+
+- name: 'Delete posix_group Produktion'
+  ldap_entry:
+    dn: "cn=Produktion,ou=groups,ou=Produktion,ou=Firma,{{ base_dn }}"
+    state: 'absent'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
+
+- name: 'Delete posix_group Verwaltung'
+  ldap_entry:
+    dn: "cn=Verwaltung,ou=groups,ou=Verwaltung,ou=Firma,{{ base_dn }}"
+    state: 'absent'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
 
 - name: 'Delete OUs'
   ldap_entry:
     dn: "{{ item }}"
     state: 'absent'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop:
     - "ou=users,{{ base_dn }}"
     - "ou=groups,{{ base_dn }}"
@@ -43,8 +63,17 @@
   ldap_attr:
     dn: 'olcDatabase={2}mdb,cn=config'
     name: 'olcAccess'
-    values: '[]'
+    values: "{{ item }}"
     state: 'absent'
+    bind_dn: "{{ rootdn_cn_config }}"
+    bind_pw: "{{ rootdn_cn_config_password | default(rootdn_password) }}"
+  loop:
+    - '{5}to attrs=shadowLastChange by self write by * read'
+    - '{4}to attrs=userPassword by self write by anonymous auth by * none'
+    - '{3}to dn.children={{ base_dn }} by dn.exact=cn=ldap-admin,ou=users,{{ base_dn }} write by * break'
+    - '{2}to dn.exact={{ base_dn }} by dn.exact=cn=ldap-admin,ou=users,{{ base_dn }} write by users read by * none'
+    - '{1}to dn.exact=cn=subschema by * read'
+    - '{0}to dn.exact="" by * read'
 
 - name: 'Delete the debugging script'
   file:
