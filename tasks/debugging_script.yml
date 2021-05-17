@@ -36,6 +36,7 @@
     - 'DELETE_acl_8.ldif'
     - 'DELETE_acl_9.ldif'
     - 'DELETE_ALL_acls.ldif'
+    - 'DELETE_ALL_FRONTEND_acls.ldif'
     - 'step1_basedn.ldif'
     - 'step2_users_and_groups_ous.ldif'
     - 'step3_ldap-admin.ldif'
