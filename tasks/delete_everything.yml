@@ -53,8 +53,15 @@
   ldap_attr:
     dn: 'olcDatabase={2}mdb,cn=config'
     name: 'olcAccess'
-    values: '[]'
+    values: "{{ item }}"
     state: 'absent'
+  loop:
+    - '{5}to attrs=shadowLastChange by self write by * read'
+    - '{4}to attrs=userPassword by self write by anonymous auth by * none'
+    - '{3}to dn.children={{ base_dn }} by dn.exact=cn=ldap-admin,ou=users,{{ base_dn }} write by * break'
+    - '{2}to dn.exact={{ base_dn }} by dn.exact=cn=ldap-admin,ou=users,{{ base_dn }} write by users read by * none'
+    - '{1}to dn.exact=cn=subschema by * read'
+    - '{0}to dn.exact="" by * read'
 
 - name: 'Delete the debugging script'
   file:
