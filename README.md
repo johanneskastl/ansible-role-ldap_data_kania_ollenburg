@@ -16,6 +16,14 @@ The role will install any dependencies that Ansible's `ldap_attr` or `ldap_entry
 Role Variables
 --------------
 
+*General usage*
+This role uses the rootDN of both the actual database and the one for cn=config to create or delete objects, to obviously you need to supply the following information:
+
+- `rootdn_password`: (required) the password for the database's rootDN
+- `rootdn_name`: the name of the database's rootDN, default is `cn=admin`
+- `rootdn_cn_config`: the name of the rootDN used for `cn=config`, default is `cn=admin,cn=config`
+- `rootdn_cn_config_password`: the password for the rootDN used for `cn=config`, default is to use the same as for the database's rootDN
+
 *Role logic*
 This role has several parts, than can be enabled by setting some variables:
 - `apply_ACLs`: (default: true) Whether or not to apply the ACLs
@@ -39,7 +47,7 @@ In case you set the `add_debugging_script_and_ldif_files` variable, this role wi
 
 The debugging script needs the *cleartext* passwords of the users. This should obviously *not be used on productive servers with real passwords*!
 
-- `rootdn_password`: cleartext password of the rootDN
+- `rootdn_password`: cleartext password of the database's rootDN
 - `sssd_user_password`: cleartext password of the sssd-user
 - `chapter_7_1_password`: cleartext password of the regular users from chapter 7.1
 
