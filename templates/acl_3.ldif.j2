@@ -1,0 +1,4 @@
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: {3}to dn.children={{ base_dn }} by dn.exact=cn=ldap-admin,ou=users,{{ base_dn }} write by * break
