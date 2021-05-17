@@ -19,6 +19,8 @@
       sn: "{{ item.sn }}"
       givenName: "{{ item.givenname }}"
       businessCategory: "{{ item.businesscategory }}"
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   with_items:
     - dn: 'cn=u1 Prod,ou=users,ou=Produktion,ou=Firma'
       uid: 'u1-prod'
@@ -69,6 +71,8 @@
     name: "{{ item.key }}"
     values: "{{ item.value }}"
     state: 'exact'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop: "{{ user_details | dict2items }}"
   vars:
     user_details:
@@ -93,6 +97,8 @@
     name: "{{ item.key }}"
     values: "{{ item.value }}"
     state: 'exact'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop: "{{ user_details | dict2items }}"
   vars:
     user_details:
@@ -117,6 +123,8 @@
     name: "{{ item.key }}"
     values: "{{ item.value }}"
     state: 'exact'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop: "{{ user_details | dict2items }}"
   vars:
     user_details:
@@ -141,6 +149,8 @@
     name: "{{ item.key }}"
     values: "{{ item.value }}"
     state: 'exact'
+    bind_dn: "{{ rootdn_name }},{{ base_dn }}"
+    bind_pw: "{{ rootdn_password }}"
   loop: "{{ user_details | dict2items }}"
   vars:
     user_details:
