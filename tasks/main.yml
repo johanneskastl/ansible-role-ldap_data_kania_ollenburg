@@ -61,6 +61,12 @@
     - 'not remove_everything | bool'
     - 'not add_initial_testing_users | bool'
 
+- name: 'Run acls.yml'
+  include_tasks: acls.yml
+  when:
+    - 'not remove_everything | bool'
+    - 'apply_ACLs | bool'
+
 - name: 'Run debugging_script.yml'
   include_tasks: debugging_script.yml
   when:
