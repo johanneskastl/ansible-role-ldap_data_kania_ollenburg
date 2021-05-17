@@ -20,6 +20,11 @@
     dn: "cn=benutzer,ou=groups,{{ base_dn }}"
     state: 'absent'
 
+- name: 'Delete posix_group Produktion'
+  ldap_entry:
+    dn: "cn=Produktion,ou=groups,ou=Produktion,ou=Firma,{{ base_dn }}"
+    state: 'absent'
+
 - name: 'Delete OUs'
   ldap_entry:
     dn: "{{ item }}"
