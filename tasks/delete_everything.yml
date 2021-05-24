@@ -61,7 +61,7 @@
 
 - name: 'Delete ACLs'
   ldap_attr:
-    dn: 'olcDatabase={2}mdb,cn=config'
+    dn: "{{ olcDatabase }}"
     name: 'olcAccess'
     values: "{{ item }}"
     state: 'absent'
