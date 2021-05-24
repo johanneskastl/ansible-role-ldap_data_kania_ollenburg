@@ -1,4 +1,4 @@
 dn: {{ olcDatabase }}
 changetype: modify
 add: olcAccess
-olcAccess: {2}to dn.exact={{ base_dn }} by dn.exact=uid=ldap-admin,ou=users,{{ base_dn }} write by * read
+olcAccess: {2}to dn.exact={{ base_dn }} by dn.exact=uid=ldap-admin,ou=users,{{ base_dn }} write by users read by * read
