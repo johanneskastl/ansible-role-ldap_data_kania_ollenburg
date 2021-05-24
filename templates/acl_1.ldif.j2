@@ -1,4 +1,4 @@
-dn: olcDatabase={2}mdb,cn=config
+dn: {{ olcDatabase }}
 changetype: modify
 add: olcAccess
 olcAccess: {1}to dn.exact=cn=subschema by * read
