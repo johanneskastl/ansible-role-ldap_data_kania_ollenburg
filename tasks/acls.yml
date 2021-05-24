@@ -3,7 +3,7 @@
 
 - name: 'Set ACLs'
   ldap_attr:
-    dn: 'olcDatabase={2}mdb,cn=config'
+    dn: "{{ olcDatabase }}"
     name: 'olcAccess'
     values: "{{ item }}"
     bind_dn: "{{ rootdn_cn_config }}"
