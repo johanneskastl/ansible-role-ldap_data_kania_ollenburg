@@ -11,7 +11,7 @@
   loop:
     - '{0}to dn.exact="" by * read'
     - '{1}to dn.exact=cn=subschema by * read'
-    - "{2}to dn.exact={{ base_dn }} by dn.exact=cn=ldap-admin,ou=users,{{ base_dn }} write by users read by * none"
-    - "{3}to dn.children={{ base_dn }} by dn.exact=cn=ldap-admin,ou=users,{{ base_dn }} write by * break"
+    - "{2}to dn.exact={{ base_dn }} by dn.exact=uid=ldap-admin,ou=users,{{ base_dn }} write by users read by * none"
+    - "{3}to dn.children={{ base_dn }} by dn.exact=uid=ldap-admin,ou=users,{{ base_dn }} write by * break"
     - '{4}to attrs=userPassword by self write by anonymous auth by * none'
     - '{5}to attrs=shadowLastChange by self write by * read'
