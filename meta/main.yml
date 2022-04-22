@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: 'ldap_data_kania_ollenburg'
+  namespace: 'johanneskastl'
   author: 'Johannes Kastl'
   description: 'OpenLDAP DIT based on the book by Stefan Kania and Andreas Ollenburg'
   company: 'B1 Systems GmbH'
