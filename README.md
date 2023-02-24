@@ -65,7 +65,7 @@ A simple playbook that will only do the minimum will look like this:
 ```
 - hosts: servers
   roles:
-    - { role: 'johanneskastl.ldap_data_kania_ollenburg' }
+    - role: 'johanneskastl.ldap_data_kania_ollenburg'
 ```
 
 To delete everything this role created, use a playbook like this:
