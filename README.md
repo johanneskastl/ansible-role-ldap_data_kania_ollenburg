@@ -82,17 +82,16 @@ A playbook that will not only create the groups and users in LDAP but also creat
 - hosts: servers
   roles:
     - role: 'johanneskastl.ldap_data_kania_ollenburg'
-      vars:
-        # create ACL debugging script
-        add_debugging_script_and_ldif_files: 'true'
-        rootdn_name: 'cn=Manager'
-        # Password Hashes
-        sssd_user_password_hash: '{SSHA}1234567890abcdef'
-        chapter_7_1_password_hash: '{SSHA}567890abcdef1234'
-        # Passwords
-        rootdn_password: 'totallysupersecret'
-        sssd_user_password: 'shouldalsobesecret'
-        chapter_7_1_password: 'secret'
+      # create ACL debugging script
+      add_debugging_script_and_ldif_files: 'true'
+      rootdn_name: 'cn=Manager'
+      # Password Hashes
+      sssd_user_password_hash: '{SSHA}1234567890abcdef'
+      chapter_7_1_password_hash: '{SSHA}567890abcdef1234'
+      # Passwords
+      rootdn_password: 'totallysupersecret'
+      sssd_user_password: 'shouldalsobesecret'
+      chapter_7_1_password: 'secret'
 ```
 
 License
